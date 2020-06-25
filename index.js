@@ -1,16 +1,69 @@
-import 'react-app-polyfill/ie9'; // For IE 9-11 support
-import 'react-app-polyfill/stable';
-// import 'react-app-polyfill/ie11'; // For IE 11 support
-import './polyfill'
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import {
+  Breadcrumbs,
+  Cards,
+  Carousels,
+  Collapses,
+  Dropdowns,
+  Forms,
+  Jumbotrons,
+  ListGroups,
+  Navbars,
+  Navs,
+  Paginations,
+  Popovers,
+  ProgressBar,
+  Switches,
+  Tables,
+  Tabs,
+  Tooltips,
+} from './Base';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { ButtonDropdowns, ButtonGroups, Buttons, BrandButtons } from './Buttons';
+import Charts from './Charts';
+import Dashboard from './Dashboard';
+import { CoreUIIcons, Flags, FontAwesome, SimpleLineIcons } from './Icons';
+import { Alerts, Badges, Modals } from './Notifications';
+import { Login, Page404, Page500, Register } from './Pages';
+import { Colors, Typography } from './Theme';
+import Widgets from './Widgets';
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+export {
+  Badges,
+  Typography,
+  Colors,
+  CoreUIIcons,
+  Page404,
+  Page500,
+  Register,
+  Login,
+  Modals,
+  Alerts,
+  Flags,
+  SimpleLineIcons,
+  FontAwesome,
+  ButtonDropdowns,
+  ButtonGroups,
+  BrandButtons,
+  Buttons,
+  Tooltips,
+  Tabs,
+  Tables,
+  Charts,
+  Dashboard,
+  Widgets,
+  Jumbotrons,
+  Switches,
+  ProgressBar,
+  Popovers,
+  Navs,
+  Navbars,
+  ListGroups,
+  Forms,
+  Dropdowns,
+  Collapses,
+  Carousels,
+  Cards,
+  Breadcrumbs,
+  Paginations,
+};
+
