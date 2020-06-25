@@ -1,24 +1,21 @@
 import React, { Component, lazy } from 'react';
-import { Bar, Line, Pie, Doughnut } from 'react-chartjs-2';
+import { Line, Pie } from 'react-chartjs-2';
 import {
-  Badge,
   Button,
-  //ButtonDropdown,
+  ButtonDropdown,
   ButtonGroup,
   ButtonToolbar,
   Card,
   CardBody,
   CardHeader,
-  //CardFooter, 
+  CardFooter,
   CardTitle,
   Col,
-  //Dropdown,
-  //DropdownItem,
-  //DropdownMenu,
-  //DropdownToggle,
-  Progress,
-  Row,
-  //Table,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  Row
 } from 'reactstrap';
 import './dashboard.css'
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
@@ -26,44 +23,29 @@ import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 
 //const Widget03 = lazy(() => import('../../views/Widgets/Widget03'));
 
-//const brandPrimary = getStyle('--primary')
-//const brandSuccess = getStyle('--success')
+const brandPrimary = getStyle('--primary')
+const brandSuccess = getStyle('--success')
 const brandInfo = getStyle('--info')
-//const brandWarning = getStyle('--warning')
+const brandWarning = getStyle('--warning')
 const brandDanger = getStyle('--danger')
 
+// Card Chart 1
+const cardChartData1 = {
+  labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+  datasets: [
+    {
+      label: 'Water used on each day of the week',
+      backgroundColor: brandPrimary,
+      borderColor: 'rgba(255,255,255,.55)',
+      data: [100, 99, 100],
+    },
+  ],
+};
 
-// Main Chart
-
-//Random Numbers
-function random(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-var elements = 27;
-var data1 = [];
-var data2 = [];
-var data3 = [];
-
-for (var i = 0; i <= elements; i++) {
-  data1.push(random(50, 200));
-  data2.push(random(80, 100));
-  data3.push(20000);
-}
-
-
-const mainChartOpts = {
+const cardChartOpts1 = {
   tooltips: {
     enabled: false,
-    custom: CustomTooltips,
-    intersect: true,
-    mode: 'index',
-    position: 'nearest',
-    callbacks: {
-      labelColor: function (tooltipItem, chart) {
-        return { backgroundColor: chart.data.datasets[tooltipItem.datasetIndex].borderColor }
-      }
-    }
+    custom: CustomTooltips
   },
   maintainAspectRatio: false,
   legend: {
@@ -73,28 +55,260 @@ const mainChartOpts = {
     xAxes: [
       {
         gridLines: {
-          drawOnChartArea: false,
+          color: 'transparent',
+          zeroLineColor: 'transparent',
         },
+        ticks: {
+          fontSize: 2,
+          fontColor: 'transparent',
+        },
+
       }],
     yAxes: [
       {
+        display: false,
         ticks: {
-          beginAtZero: true,
-          maxTicksLimit: 5,
-          stepSize: Math.ceil(100000 / 5),
-          max: 100000,
+          display: false,
+          min: Math.min.apply(Math, cardChartData1.datasets[0].data) - 5,
+          max: Math.max.apply(Math, cardChartData1.datasets[0].data) + 5,
         },
       }],
   },
   elements: {
+    line: {
+      borderWidth: 1,
+    },
+    point: {
+      radius: 4,
+      hitRadius: 10,
+      hoverRadius: 4,
+    },
+  }
+}
+
+
+// Card Chart 2
+const cardChartData2 = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  datasets: [
+    {
+      label: 'My First dataset',
+      backgroundColor: brandInfo,
+      borderColor: 'rgba(255,255,255,.55)',
+      data: [1, 18, 9, 17, 34, 22, 11],
+    },
+  ],
+};
+
+const cardChartOpts2 = {
+  tooltips: {
+    enabled: false,
+    custom: CustomTooltips
+  },
+  maintainAspectRatio: false,
+  legend: {
+    display: false,
+  },
+  scales: {
+    xAxes: [
+      {
+        gridLines: {
+          color: 'transparent',
+          zeroLineColor: 'transparent',
+        },
+        ticks: {
+          fontSize: 2,
+          fontColor: 'transparent',
+        },
+
+      }],
+    yAxes: [
+      {
+        display: false,
+        ticks: {
+          display: false,
+          min: Math.min.apply(Math, cardChartData2.datasets[0].data) - 5,
+          max: Math.max.apply(Math, cardChartData2.datasets[0].data) + 5,
+        },
+      }],
+  },
+  elements: {
+    line: {
+      tension: 0.00001,
+      borderWidth: 1,
+    },
+    point: {
+      radius: 4,
+      hitRadius: 10,
+      hoverRadius: 4,
+    },
+  },
+};
+
+// Card Chart 3
+const cardChartData3 = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  datasets: [
+    {
+      label: 'My First dataset',
+      backgroundColor: 'rgba(255,255,255,.2)',
+      borderColor: 'rgba(255,255,255,.55)',
+      data: [78, 81, 80, 45, 34, 12, 40],
+    },
+  ],
+};
+
+const cardChartOpts3 = {
+  tooltips: {
+    enabled: false,
+    custom: CustomTooltips
+  },
+  maintainAspectRatio: false,
+  legend: {
+    display: false,
+  },
+  scales: {
+    xAxes: [
+      {
+        display: false,
+      }],
+    yAxes: [
+      {
+        display: false,
+      }],
+  },
+  elements: {
+    line: {
+      borderWidth: 2,
+    },
     point: {
       radius: 0,
       hitRadius: 10,
       hoverRadius: 4,
-      hoverBorderWidth: 3,
     },
   },
 };
+
+
+
+
+// Social Box Chart
+
+// const makeSocialBoxData = (dataSetNo) => {
+//   const dataset = socialBoxData[dataSetNo];
+//   const data = {
+//     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+//     datasets: [
+//       {
+//         backgroundColor: 'rgba(255,255,255,.1)',
+//         borderColor: 'rgba(255,255,255,.55)',
+//         pointHoverBackgroundColor: '#fff',
+//         borderWidth: 2,
+//         data: dataset.data,
+//         label: dataset.label,
+//       },
+//     ],
+//   };
+//   return () => data;
+// };
+
+// const socialChartOpts = {
+//   tooltips: {
+//     enabled: false,
+//     custom: CustomTooltips
+//   },
+//   responsive: true,
+//   maintainAspectRatio: false,
+//   legend: {
+//     display: false,
+//   },
+//   scales: {
+//     xAxes: [
+//       {
+//         display: false,
+//       }],
+//     yAxes: [
+//       {
+//         display: false,
+//       }],
+//   },
+//   elements: {
+//     point: {
+//       radius: 0,
+//       hitRadius: 10,
+//       hoverRadius: 4,
+//       hoverBorderWidth: 3,
+//     },
+//   },
+// };
+
+// sparkline charts
+
+
+
+
+// Main Chart
+
+//Random Numbers
+// function random(min, max) {
+//   return Math.floor(Math.random() * (max - min + 1) + min);
+// }
+
+// var elements = 27;
+// var data1 = [];
+// var data2 = [];
+// var data3 = [];
+
+// for (var i = 0; i <= elements; i++) {
+//   data1.push(random(50, 200));
+//   data2.push(random(80, 100));
+//   data3.push(65);
+// }
+
+
+// const mainChartOpts = {
+//   tooltips: {
+//     enabled: false,
+//     custom: CustomTooltips,
+//     intersect: true,
+//     mode: 'index',
+//     position: 'nearest',
+//     callbacks: {
+//       labelColor: function (tooltipItem, chart) {
+//         return { backgroundColor: chart.data.datasets[tooltipItem.datasetIndex].borderColor }
+//       }
+//     }
+//   },
+//   maintainAspectRatio: false,
+//   legend: {
+//     display: false,
+//   },
+//   scales: {
+//     xAxes: [
+//       {
+//         gridLines: {
+//           drawOnChartArea: false,
+//         },
+//       }],
+//     yAxes: [
+//       {
+//         ticks: {
+//           beginAtZero: true,
+//           maxTicksLimit: 5,
+//           stepSize: Math.ceil(250 / 5),
+//           max: 250,
+//         },
+//       }],
+//   },
+//   elements: {
+//     point: {
+//       radius: 0,
+//       hitRadius: 10,
+//       hoverRadius: 4,
+//       hoverBorderWidth: 3,
+//     },
+//   },
+// };
 
 class Dashboard extends Component {
 
@@ -107,26 +321,20 @@ class Dashboard extends Component {
     this.state = {
       dropdownOpen: false,
       radioSelected: 2,
-      loadedData: '',
+      energyData1: '',
+      waterData1: '',
+      energyData2: '',
+      waterData2: '',
+      energyData3: '',
+      waterData3: '',
       timeStamp: '',
-      thresholdValue: 0,
-      totalConsumptionToday: 0,
-      totalConsumptionYesterday: 0,
-      AM_7_today: 0,
-      AM_8_today: 0,
-      AM_9_today: 0,
-      AM_10_today: 0,
-      AM_11_today: 0,
-      PM_12_today: 0,
-      PM_1_today: 0,
-      AM_7_yesterday: 0,
-      AM_8_yesterday: 0,
-      AM_9_yesterday: 0,
-      AM_10_yesterday: 0,
-      AM_11_yesterday: 0,
-      PM_12_yesterday: 0,
-      PM_1_yesterday: 0
-      
+      timeStamp2: '',
+      warning: false,
+      cardenergy: 0,
+      cardwater: 0,
+      totalCost: 0,
+      graph_energy: '',
+      graph_water: ''
     };
   }
 
@@ -141,333 +349,409 @@ class Dashboard extends Component {
       radioSelected: radioSelected,
     });
   }
-
   async componentDidMount() {
     try {
       this.getData()
-      this.getfromApi()
-      //console.log(mainChartOpts)
-      this.interval = setInterval(this.getData, 10000);
+      ///this.getfromApi()
+      this.interval = setInterval(this.getData, 60000);
     } catch (err) {
-      console.log(err.message); 
+      console.log(err.message);
     }
   }
 
   getData = async () => {
-    await fetch(`http://localhost:5000/api/waterlevels/DEMO1SU2`)
+    await fetch(`http://localhost:5000/api/energy/p1`)
       .then(response => response.json())
-      .then(apartment => {
-        var arr = []
-        //console.log(apartment)
-        apartment.apartment.forEach(element => {
-          //console.log(element.water_level)
-          arr.push(element['Process Level'])
-        })
-        this.setState({ loadedData: arr})
+      .then(energy => {
+        var ene1 = []
+        var ene2 = []
+        var ene3 = []
+        var time = []
+        var time2 = []
+        var wat1 = []
+        var wat2 = []
+        var wat3 = []
+        var graph_ene = []
+        var graph_wat = []
+        var cardene = 0.0
+        var cardwat = 0.0
+        var time_temp = ''
+        var lenn = energy.energy.length
+        console.log(energy.energy[0])
+        var i
+        for (i = lenn - 12; i < lenn; i++) {
+          ene1.push(energy.energy[i].Energy1 * 1000)
+          wat1.push(energy.energy[i].WaterLevel1)
+          ene2.push(energy.energy[i].Energy1 * 1000)
+          wat2.push(energy.energy[i].WaterLevel2)
+          ene3.push(energy.energy[i].Energy3 * 1000)
+          wat3.push(energy.energy[i].WaterLevel3)
+
+          time_temp = energy.energy[i].Hour + ':' + energy.energy[i].Minute
+
+          time.push(time_temp)
+          cardene = cardene + energy.energy[i].Energy1 + energy.energy[i].Energy2 + energy.energy[i].Energy3
+          cardwat = cardwat + energy.energy[i].WaterLevel3 + energy.energy[i].WaterLevel2 + energy.energy[i].WaterLevel1
+        }
+        for (i = lenn - 7; i < lenn; i++) {
+          graph_ene.push(energy.energy[i].Energy1 + energy.energy[i].Energy2 + energy.energy[i].Energy3)
+          graph_wat.push(energy.energy[i].WaterLevel1 + energy.energy[i].WaterLevel2 + energy.energy[i].WaterLevel3)
+          time_temp = energy.energy[i].Hour + ':' + energy.energy[i].Minute
+          time2.push(time_temp)
+        }
+        var len = wat1.length
+        //wat1[len] = 0
+        if (wat1[len - 1] === 0 || wat3[len - 1] === 0 || wat2[len - 1] === 0) {
+          this.setState({ warning: true })
+        }
+        this.setState({ timeStamp2: time2, graph_energy: graph_ene, graph_water: graph_wat, cardenergy: cardene, cardwater: cardwat, energyData1: ene1, waterData1: wat1, energyData2: ene2, waterData2: wat2, energyData3: ene3, waterData3: wat3, timeStamp: time })
       })
   }
-
   getfromApi = async () => {
     let myheaders = {
-      "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNfaWQiOiI1NWQ0YzliZC01YzdiLTRmZjgtOGU2Yi01NGUzNzBhMGIxMjAiLCJleHAiOjE1ODgwNTc3NDl9.LtXyCv_RPyvfvY7wdjPqqsVtlztdHr9GvPFtZtI7BCA" //Token is added here
+      "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNfaWQiOiI1NWQ0YzliZC01YzdiLTRmZjgtOGU2Yi01NGUzNzBhMGIxMjAiLCJleHAiOjE1ODc3MjA1Njh9.pnHo5s6W4WmX4unfwleaGnypXmxsbdYQoVEbZnefoVQ"
     }
-
-
-    // Total Consumption in a Day Card, Hourly Graph - Today's Values
     try {
-      var totalconsumptiontoday=0
-      var seven_today=0
-      var eight_today=0
-      var nine_today=0
-      var ten_today=0
-      var eleven_today=0
-      var twelve_today=0
-      await fetch(`http://54.244.196.27/aquagen/v1/industries/DEMO1/consumption/graph?duration=daily&unit_id=DEMO1IU1`, {
+      var cost = 0
+      await fetch(`http://54.244.196.27/aquagen/v1/industries/DEMO1/consumption/latest?unit_id=DEMO1IU1`, {
         method: 'GET',
         headers: myheaders
       })
         .then(response => response.json())
-        .then(water1 => {
-          totalconsumptiontoday=water1.data.total_consumption
-          seven_today=(water1.data.hours[6]['7.0'].process_consumption/1000)*100
-          eight_today=(water1.data.hours[7]['8.0'].process_consumption/1000)*100
-          nine_today=(water1.data.hours[8]['9.0'].process_consumption/1000)*100
-          ten_today=(water1.data.hours[9]['10.0'].process_consumption/1000)*100
-          eleven_today=(water1.data.hours[10]['11.0'].process_consumption/1000)*100
-          twelve_today=(water1.data.hours[11]['12.0'].process_consumption/1000)*100
+        .then(energy1 => {
+          console.log(energy1.data.total_cost)
+          cost = energy1.data.total_cost
         })
-        this.setState({totalConsumptionToday: totalconsumptiontoday, AM_7_today: seven_today.toFixed(2), AM_8_today:eight_today.toFixed(2), AM_9_today: nine_today.toFixed(2), AM_10_today: ten_today.toFixed(2), AM_11_today: eleven_today.toFixed(2), PM_12_today: twelve_today.toFixed(2)})
+      this.setState({ totalCost: cost })
     } catch (err) {
       console.log(err.message);
     }
-
-    // Hourly Graph - Yesterdays's Values
-    try {
-      var totalconsumptionyesterday=0
-      var seven_yesterday=0
-      var eight_yesterday=0
-      var nine_yesterday=0
-      var ten_yesterday=0
-      var eleven_yesterday=0
-      var twelve_yesterday=0
-
-      await fetch(`http://54.244.196.27/aquagen/v1/industries/DEMO1/consumption/graph?duration=yesterday&unit_id=DEMO1IU1`, {
-        method: 'GET',
-        headers: myheaders
-      })
-        .then(response => response.json())
-        .then(water2 => {
-          totalconsumptionyesterday=water2.data.total_consumption
-          seven_yesterday=(water2.data.hours[7]['7.0'].process_consumption/1000)*100
-          eight_yesterday=(water2.data.hours[8]['8.0'].process_consumption/1000)*100
-          nine_yesterday=(water2.data.hours[9]['9.0'].process_consumption/1000)*100
-          ten_yesterday=(water2.data.hours[10]['10.0'].process_consumption/1000)*100
-          eleven_yesterday=(water2.data.hours[11]['11.0'].process_consumption/1000)*100
-          twelve_yesterday=(water2.data.hours[12]['12.0'].process_consumption/1000)*100
-        })
-        this.setState({totalConsumptionYesterday: totalconsumptionyesterday, AM_7_yesterday: seven_yesterday.toFixed(2), AM_8_yesterday:eight_yesterday.toFixed(2), AM_9_yesterday: nine_yesterday.toFixed(2), AM_10_yesterday: ten_yesterday.toFixed(2), AM_11_yesterday: eleven_yesterday.toFixed(2), PM_12_yesterday: twelve_yesterday.toFixed(2)})
-    } catch (err) {
-      console.log(err.message);
-    }
-
-    try {
-      var threshold = 0
-      await fetch(`http://54.244.196.27/aquagen/v1/industries/DEMO1/consumption/latest?units`, {
-        method: 'GET',
-        headers: myheaders
-      })
-        .then(response => response.json())
-        .then(water => {
-
-          threshold=water.data.units[0].DEMO1SU1.unit_threshold
-
-        })
-      this.setState({thresholdValue: threshold})
-    } catch (err) {
-      console.log(err.message);
-    }
-
-    this.setState({water_consumed:this.state.totalConsumptionToday+this.state.totalConsumptionYesterday, water_left: 60000-(this.state.totalConsumptionToday+this.state.totalConsumptionYesterday) })
   }
 
-
-
-  loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div> 
-
-
+  loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
 
   render() {
 
     return (
       <div className="animated fadeIn">
-        <Row>
-          <Col xs="12" sm="6" lg="3">
-            <Card className="text-white bg-info text-center">
-              <CardBody className="pb-0">
-                <ButtonGroup className="float-right">
-                </ButtonGroup>
-                <div className="text-value">{this.state.totalConsumptionYesterday}</div>
-                <div>Water Consumption - Yesterday</div>
-                <div>(Gallons)</div>
-                <br />
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col xs="12" sm="6" lg="3">
-            <Card className="text-white bg-primary text-center">
-              <CardBody className="pb-0">
-                <div className="text-value">{this.state.totalConsumptionToday}</div>
-                <div>Water Consumption Today</div>
-                <div>(Gallons)</div>
-                <br />
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col xs="12" sm="6" lg="3">
-            <Card className="text-white bg-warning text-center">
-              <CardBody className="pb-0">
-                <div className="text-value">{this.state.totalConsumptionYesterday*7}</div>
-                <div>Water Consumption This Week</div>
-                <div>(Gallons)</div>
-                <br />
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col xs="12" sm="6" lg="3">
-            <Card className="text-white bg-success text-center">
-              <CardBody className="pb-0">
-                <div className="text-value">{this.state.thresholdValue}</div>
-                <div>Threshold Value</div>
-                <div>(Inches)</div>
-                <br />
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Card>
-              <CardHeader>
-                Water Consumption in the Different Hours of the Day and Live Water Level Update
-              </CardHeader>
+        {/* <Row>
+          <Col lg="3" md="6" sm="6">
+            <Card className="card-stats">
               <CardBody>
                 <Row>
-                  <Col xs="12" md="6" xl="6">
-                    <hr className="mt-0" />
-                    <div className="progress-group mb-4">
-                      <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                          <b>7 AM</b> <br />
-                          {this.state.AM_7_today*10} Gallons <br />
-                          {this.state.AM_7_yesterday*10} Gallons
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <Progress className="progress-xs" color="info" value={this.state.AM_7_today} />
-                        <Progress className="progress-xs" color="danger" value={this.state.AM_7_yesterday} />
-                      </div>
-                    </div>
-                    <div className="progress-group mb-4">
-                      <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                          <b>8 AM</b> <br />
-                          {this.state.AM_8_today*10} Gallons <br />
-                          {this.state.AM_8_yesterday*10} Gallons
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <Progress className="progress-xs" color="info" value={this.state.AM_8_today} />
-                        <Progress className="progress-xs" color="danger" value={this.state.AM_8_yesterday}/>
-                      </div>
-                    </div>
-                    <div className="progress-group mb-4">
-                      <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                          <b>9 AM</b> <br />
-                          {this.state.AM_9_today*10} Gallons <br />
-                          {this.state.AM_9_yesterday*10} Gallons
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <Progress className="progress-xs" color="info" value={this.state.AM_9_today} />
-                        <Progress className="progress-xs" color="danger" value={this.state.AM_9_yesterday} />
-                      </div>
+                  <Col md="4" xs="5">
+                    <div className="icon-big text-center icon-warning">
+                      <i className="nc-icon nc-globe text-warning" />
                     </div>
                   </Col>
-                  <Col xs="12" md="6" xl="6">
-                    <hr className="mt-0" />
-                    <div className="progress-group mb-4">
-                      <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                          <b>10 AM</b> <br />
-                          {this.state.AM_10_today*10} Gallons <br />
-                          {this.state.AM_10_yesterday*10} Gallons
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <Progress className="progress-xs" color="info" value={this.state.AM_10_today} />
-                        <Progress className="progress-xs" color="danger" value={this.state.AM_10_yesterday} />
-                      </div>
+                  <Col md="8" xs="7">
+                    <div className="numbers">
+                      <p className="card-category">Total Energy Consumed</p>
+                      <CardTitle tag="p">1500</CardTitle>
+                      <p />
                     </div>
-                    <div className="progress-group mb-4">
-                      <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                          <b>11 AM</b><br />
-                          {this.state.AM_11_today*10} Gallons <br />
-                          {this.state.AM_11_yesterday*10} Gallons
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <Progress className="progress-xs" color="info" value={this.state.AM_11_today} />
-                        <Progress className="progress-xs" color="danger" value={this.state.AM_11_yesterday} />
-                      </div>
-                    </div>
-
-                    <div className="progress-group mb-4">
-                      <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                          <b> 12 PM</b> <br />
-                          {this.state.PM_12_today*10} Gallons <br />
-                          {this.state.PM_12_yesterday*10} Gallons
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <Progress className="progress-xs" color="info" value={this.state.PM_12_today} />
-                        <Progress className="progress-xs" color="danger" value={this.state.PM_12_yesterday} />
-                      </div>
-                    </div>
-                    <div className="legend text-center">
-                      <small>
-                        <sup className="px-1 text-center"><Badge pill color="info">&nbsp;</Badge></sup>
-                        Water Consumed Today
-                        &nbsp;
-                        <sup className="px-1 text-center"><Badge pill color="danger">&nbsp;</Badge></sup>
-                        Water Consumed Yesterday
-                      </small>
-                    </div>
-                    <br />
                   </Col>
                 </Row>
-                <Row>
-                <Col xs="12" md="6" xl="6">
-                    <hr className="mt-0" />
-                    <div className="chart-wrapper" style={{ height: 300 + 'px', marginTop: 40 + 'px' }}>
-                      <Doughnut data={
-                        {
-                          labels: [
-                            'Water Left in Tank',
-                            'Water Consumed'
-                          ],
-                          datasets: [{
-                            data: [this.state.water_left,this.state.water_consumed],
-                            backgroundColor: [
-                              '#36A2EB',
-                              '#FF6384'
-                            ],
-                            hoverBackgroundColor: [
-                              '#36A2EB',
-                              '#FF6384'
-                            ]
-                          }],
-                        }
-                      } />
-                    </div>
-                  </Col>
-                  <Col>
-                    <hr className="mt-0" />   
-                    <br />       
-                    <br />        
-                    <Card className="text-white bg-success text-center">
-                      <CardBody className="pb-0">
-                        <div className="text-value">{this.state.water_left}</div>
-                        <div>Water Left in Tank (Gallons)</div>
-                        <br />
-                      </CardBody>
-                    </Card>
-                    <Card className="text-white bg-info text-center">
-                      <CardBody className="pb-0">
-                        <div className="text-value">{this.state.water_consumed}</div>
-                        <div>Water Consumed</div>
-                        <br />
-                      </CardBody>
-                    </Card>
-                  </Col>
-                </Row>
-                <br />
               </CardBody>
+              <CardFooter>
+                <hr />
+                <div className="stats">
+                  <i className="fas fa-sync-alt" /> Update Now
+                  </div>
+              </CardFooter>
             </Card>
           </Col>
-        </Row> 
+          <Col lg="3" md="6" sm="6">
+            <Card className="card-stats">
+              <CardBody>
+                <Row>
+                  <Col md="4" xs="5">
+                    <div className="icon-big text-center icon-warning">
+                      <i className="nc-icon nc-money-coins text-success" />
+                    </div>
+                  </Col>
+                  <Col md="8" xs="7">
+                    <div className="numbers">
+                      <p className="card-category">Energy Saved</p>
+                      <CardTitle tag="p">1345</CardTitle>
+                      <p />
+                    </div>
+                  </Col>
+                </Row>
+              </CardBody>
+              <CardFooter>
+                <hr />
+                <div className="stats">
+                  <i className="far fa-calendar" /> Last day
+                  </div>
+              </CardFooter>
+            </Card>
+          </Col>
+          <Col lg="3" md="6" sm="6">
+            <Card className="card-stats">
+              <CardBody>
+                <Row>
+                  <Col md="4" xs="5">
+                    <div className="icon-big text-center icon-warning">
+                      <i className="nc-icon nc-vector text-danger" />
+                    </div>
+                  </Col>
+                  <Col md="8" xs="7">
+                    <div className="numbers">
+                      <p className="card-category">Hours used</p>
+                      <CardTitle tag="p">20</CardTitle>
+                      <p />
+                    </div>
+                  </Col>
+                </Row>
+              </CardBody>
+              <CardFooter>
+                <hr />
+                <div className="stats">
+                  <i className="far fa-clock" /> In the last hour
+                  </div>
+              </CardFooter>
+            </Card>
+          </Col>
+          <Col lg="3" md="6" sm="6">
+            <Card className="card-stats">
+              <CardBody>
+                <Row>
+                  <Col md="4" xs="5">
+                    <div className="icon-big text-center icon-warning">
+                      <i className="nc-icon nc-time-alarm text-primary" />
+                    </div>
+                  </Col>
+                  <Col md="8" xs="7">
+                    <div className="numbers">
+                      <p className="card-category">Last Hour</p>
+                      <CardTitle tag="p">65</CardTitle>
+                      <p />
+                    </div>
+                  </Col>
+                </Row>
+              </CardBody>
+              <CardFooter>
+                <hr />
+                <div className="stats">
+                  <i className="fas fa-sync-alt" /> Update now
+                  </div>
+              </CardFooter>
+            </Card>
+          </Col>
+        </Row> */}
+        <Row>
+          <Col xs="12" sm="6" lg="3">
+            {!this.state.warning && (<Card className="text-white bg-success">
+              <CardBody className="pb-0">
+                <ButtonGroup className="float-right">
+                  <ButtonDropdown id='card4' isOpen={this.state.card4} toggle={() => { this.setState({ card4: !this.state.card4 }); }}>
+                    <DropdownToggle caret className="p-0" color="transparent">
+                      <i className="icon-settings"></i>
+                    </DropdownToggle>
+                    <DropdownMenu right>
+                      <DropdownItem>Action</DropdownItem>
+                      <DropdownItem>Another action</DropdownItem>
+                      <DropdownItem>Something else here</DropdownItem>
+                    </DropdownMenu>
+                  </ButtonDropdown>
+                </ButtonGroup>
+                <div className="text-value">Status Card</div>
+                <div>No Issues</div>
+              </CardBody>
+              <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
+                {/* <Bar data={{
+                  labels: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+                  datasets: [
+                    {
+                      label: 'My First dataset',
+                      backgroundColor: 'rgba(255,255,255,.3)',
+                      borderColor: 'transparent',
+                      data: [78, 81, 80, 45, 34, 12, 40, 75, 34, 89, 32, 68, 54, 72, 18, 98],
+                    },
+                  ],
+                }} options={cardChartOpts4} height={10} /> */}
+                Everything is Under Control
+              </div>
+            </Card>)}
+            {this.state.warning && (<Card className="text-white bg-danger">
+              <CardBody className="pb-0">
+                <ButtonGroup className="float-right">
+                  <ButtonDropdown id='card4' isOpen={this.state.card4} toggle={() => { this.setState({ card4: !this.state.card4 }); }}>
+                    <DropdownToggle caret className="p-0" color="transparent">
+                      <i className="icon-settings"></i>
+                    </DropdownToggle>
+                    <DropdownMenu right>
+                      <DropdownItem>Action</DropdownItem>
+                      <DropdownItem>Another action</DropdownItem>
+                      <DropdownItem>Something else here</DropdownItem>
+                    </DropdownMenu>
+                  </ButtonDropdown>
+                </ButtonGroup>
+                <div className="text-value">Status Card</div>
+                <div>Warning!!!</div>
+              </CardBody>
+              <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
+                {/* <Bar data={{
+                  labels: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+                  datasets: [
+                    {
+                      label: 'My First dataset',
+                      backgroundColor: 'rgba(255,255,255,.3)',
+                      borderColor: 'transparent',
+                      data: [78, 81, 80, 45, 34, 12, 40, 75, 34, 89, 32, 68, 54, 72, 18, 98],
+                    },
+                  ],
+                }} options={cardChartOpts4} height={10} /> */}
+                Dry Run
+              </div>
+            </Card>)}
+          </Col>
+          <Col xs="12" sm="6" lg="3">
+            <Card className="text-white bg-info">
+              <CardBody className="pb-0">
+                <ButtonGroup className="float-right">
+                  <ButtonDropdown id='card1' isOpen={this.state.card1} toggle={() => { this.setState({ card1: !this.state.card1 }); }}>
+                    <DropdownToggle caret className="p-0" color="transparent">
+                      <i className="icon-settings"></i>
+                    </DropdownToggle>
+                    {/* <DropdownMenu right>
+                      <DropdownItem>Action</DropdownItem>
+                      <DropdownItem>Another action</DropdownItem>
+                      <DropdownItem disabled>Disabled action</DropdownItem>
+                      <DropdownItem>Something else here</DropdownItem>
+                    </DropdownMenu> */}
+                  </ButtonDropdown>
+                </ButtonGroup>
+                <div className="text-value">{this.state.cardenergy} Units</div>
+                <div>Total Energy Consumption</div>
+              </CardBody>
+              <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
+                <Line data={{
+                  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                  datasets: [
+                    {
+                      label: 'My First dataset',
+                      backgroundColor: brandInfo,
+                      borderColor: 'rgba(255,255,255,.55)',
+                      data: this.state.graph_energy,
+                    },
+                  ],
+                }} options={{
+                  tooltips: {
+                    enabled: false,
+                    custom: CustomTooltips
+                  },
+                  maintainAspectRatio: false,
+                  legend: {
+                    display: false,
+                  },
+                  scales: {
+                    xAxes: [
+                      {
+                        gridLines: {
+                          color: 'transparent',
+                          zeroLineColor: 'transparent',
+                        },
+                        ticks: {
+                          fontSize: 2,
+                          fontColor: 'transparent',
+                        },
+
+                      }],
+                    yAxes: [
+                      {
+                        display: false,
+                        ticks: {
+                          display: false,
+                          min: Math.min.apply(Math, cardChartData2.datasets[0].data) - 5,
+                          max: Math.max.apply(Math, cardChartData2.datasets[0].data) + 5,
+                        },
+                      }],
+                  },
+                  elements: {
+                    line: {
+                      tension: 0.00001,
+                      borderWidth: 1,
+                    },
+                    point: {
+                      radius: 4,
+                      hitRadius: 10,
+                      hoverRadius: 4,
+                    },
+                  },
+                }} height={70} />
+              </div>
+            </Card>
+          </Col>
+
+          <Col xs="12" sm="6" lg="3">
+            <Card className="text-white bg-primary">
+              <CardBody className="pb-0">
+                <ButtonGroup className="float-right">
+                  <Dropdown id='card2' isOpen={this.state.card2} toggle={() => { this.setState({ card2: !this.state.card2 }); }}>
+                    <DropdownToggle className="p-0" color="transparent">
+                      <i className="icon-location-pin"></i>
+                    </DropdownToggle>
+                    {/* <DropdownMenu right>
+                      <DropdownItem>Action</DropdownItem>
+                      <DropdownItem>Another action</DropdownItem>
+                      <DropdownItem>Something else here</DropdownItem>
+                    </DropdownMenu> */}
+                  </Dropdown>
+                </ButtonGroup>
+                <div className="text-value">{this.state.cardwater} Units</div>
+                <div>Water Consumption Every Day</div>
+              </CardBody>
+              <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
+                <Line data={{
+                  labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                  datasets: [
+                    {
+                      label: 'My First dataset',
+                      backgroundColor: brandPrimary,
+                      borderColor: 'rgba(255,255,255,.55)',
+                      data: this.state.graph_water,
+                    },
+                  ],
+                }} options={cardChartOpts1} height={70} />
+              </div>
+            </Card>
+          </Col>
+
+          <Col xs="12" sm="6" lg="3">
+            <Card className="text-white bg-warning">
+              <CardBody className="pb-0">
+                <ButtonGroup className="float-right">
+                  <Dropdown id='card3' isOpen={this.state.card3} toggle={() => { this.setState({ card3: !this.state.card3 }); }}>
+                    <DropdownToggle caret className="p-0" color="transparent">
+                      <i className="icon-settings"></i>
+                    </DropdownToggle>
+                    <DropdownMenu right>
+                      <DropdownItem>Action</DropdownItem>
+                      <DropdownItem>Another action</DropdownItem>
+                      <DropdownItem>Something else here</DropdownItem>
+                    </DropdownMenu>
+                  </Dropdown>
+                </ButtonGroup>
+                <div className="text-value">13.556 Units</div>
+                <div>Average Power Consumed</div>
+              </CardBody>
+              <div className="chart-wrapper" style={{ height: '70px' }}>
+                <Line data={cardChartData3} options={cardChartOpts3} height={70} />
+              </div>
+            </Card>
+          </Col>
+
+
+        </Row>
         <Row>
           <Col>
             <Card>
               <CardBody>
                 <Row>
                   <Col sm="5">
-                    <CardTitle className="mb-0">Water Level with Threshold Value</CardTitle>
+                    <CardTitle className="mb-0">Power Consumed</CardTitle>
                     <div className="small text-muted">April 2020</div>
                   </Col>
                   <Col sm="7" className="d-none d-sm-inline-block">
@@ -476,37 +760,403 @@ class Dashboard extends Component {
                     </ButtonToolbar>
                   </Col>
                 </Row>
-                <div className="chart-wrapper" style={{ height: 300 + 'px', marginTop: 40 + 'px' }}>
+                <div className="chart-wrapper" style={{ height: 500 + 'px', marginTop: 40 + 'px' }}>
                   <Line data={{
                     labels: this.state.timeStamp,
                     datasets: [
                       {
-                        label: 'My First dataset',
+                        label: 'Water Pumping',
                         backgroundColor: hexToRgba(brandInfo, 10),
                         borderColor: brandInfo,
                         pointHoverBackgroundColor: '#fff',
                         borderWidth: 2,
-                        data: this.state.loadedData,
+                        data: this.state.energyData1,
+                      },
+                      {
+                        label: 'Water Treatment',
+                        backgroundColor: hexToRgba(brandWarning, 10),
+                        borderColor: brandWarning,
+                        pointHoverBackgroundColor: '#fff',
+                        borderWidth: 2,
+                        // borderDash: [8, 5],
+                        data: this.state.energyData2,
                       },
 
                       {
-                        label: 'My Third dataset',
-                        backgroundColor: 'transparent',
-                        borderColor: brandDanger,
+                        label: 'Water Recycling',
+                        backgroundColor: hexToRgba(brandSuccess, 10),
+                        borderColor: brandSuccess,
                         pointHoverBackgroundColor: '#fff',
-                        borderWidth: 1,
-                        borderDash: [8, 5],
-                        data: data3,
+                        borderWidth: 2,
+                        // borderDash: [8, 5],
+                        data: this.state.energyData3,
                       },
                     ],
                   }}
-                    options={mainChartOpts} height={300} />
+                    options={{
+                      tooltips: {
+                        enabled: false,
+                        custom: CustomTooltips,
+                        intersect: true,
+                        mode: 'index',
+                        position: 'nearest',
+                        callbacks: {
+                          labelColor: function (tooltipItem, chart) {
+                            return { backgroundColor: chart.data.datasets[tooltipItem.datasetIndex].borderColor }
+                          }
+                        }
+                      },
+                      maintainAspectRatio: false,
+                      legend: {
+                        display: false,
+                      },
+                      scales: {
+                        xAxes: [
+                          {
+                            gridLines: {
+                              drawOnChartArea: false,
+                            },
+                          }],
+                        yAxes: [
+                          {
+                            ticks: {
+                              beginAtZero: true,
+                              maxTicksLimit: 5,
+                              stepSize: Math.ceil(500 / 5),
+                              max: 500,
+                            },
+                          }],
+                      },
+                      elements: {
+                        point: {
+                          radius: 0,
+                          hitRadius: 10,
+                          hoverRadius: 4,
+                          hoverBorderWidth: 3,
+                        },
+                      },
+                    }
+                    } height={500} />
                 </div>
-                <br />
               </CardBody>
             </Card>
           </Col>
-        </Row>        
+        </Row>
+        <Row>
+          <Col md="4">
+            <Card>
+              <CardHeader>
+                <CardTitle tag="h5">Energy Comparison</CardTitle>
+                <p className="card-category"></p>
+              </CardHeader>
+              <CardBody>
+                <Pie
+                  data={canvas => {
+                    return {
+                      labels: [1, 2, 3],
+                      datasets: [
+                        {
+                          label: "Emails",
+                          pointRadius: 0,
+                          pointHoverRadius: 0,
+                          backgroundColor: ["#4acccd", "#fcc468", "#ef8157"],
+                          borderWidth: 0,
+                          data: [342, 480, 530]
+                        }
+                      ]
+                    };
+                  }}
+
+                  options={{
+                    legend: {
+                      display: false
+                    },
+
+                    pieceLabel: {
+                      render: "percentage",
+                      fontColor: ["white"],
+                      precision: 2
+                    },
+
+                    tooltips: {
+                      enabled: false
+                    },
+
+                    scales: {
+                      yAxes: [
+                        {
+                          ticks: {
+                            display: false
+                          },
+                          gridLines: {
+                            drawBorder: false,
+                            zeroLineColor: "transparent",
+                            color: "rgba(255,255,255,0.05)"
+                          }
+                        }
+                      ],
+
+                      xAxes: [
+                        {
+                          barPercentage: 1.6,
+                          gridLines: {
+                            drawBorder: false,
+                            color: "rgba(255,255,255,0.1)",
+                            zeroLineColor: "transparent"
+                          },
+                          ticks: {
+                            display: false
+                          }
+                        }
+                      ]
+                    }
+                  }}
+                />
+              </CardBody>
+              <CardFooter>
+                <div className="legend">
+                  <i className="fa fa-circle text-primary" /> Water Treatment {" "}
+                  <i className="fa fa-circle text-warning" /> Water Pumping{" "}
+                  <i className="fa fa-circle text-danger" /> Water Recycling{" "}
+                </div>
+                <hr />
+                <div className="stats">
+                  <i className="fa fa-calendar" />
+                </div>
+              </CardFooter>
+            </Card>
+          </Col>
+          <Col md="8">
+            <Card className="card-chart">
+              <CardHeader>
+                <CardTitle tag="h5"></CardTitle>
+                <p className="card-category">Line Chart of Power Consumer VS. Water Consumed</p>
+              </CardHeader>
+              <CardBody>
+                <Line
+                  key={Math.random()}
+                  data={{
+                    // labels: [
+                    //   "Mon",
+                    //   "Tue",
+                    //   "Wed",
+                    //   "Thu",
+                    //   "Fri",
+                    //   "Sat",
+                    //   "Sun",
+                    // ],
+                    labels: this.state.timeStamp2,
+                    datasets: [
+                      {
+                        data: this.state.graph_energy,
+                        fill: false,
+                        borderColor: "#fbc658",
+                        backgroundColor: "transparent",
+                        pointBorderColor: "#fbc658",
+                        pointRadius: 4,
+                        pointHoverRadius: 4,
+                        pointBorderWidth: 8
+                      },
+                      {
+                        data: this.state.graph_water,
+                        fill: false,
+                        borderColor: "#51CACF",
+                        backgroundColor: "transparent",
+                        pointBorderColor: "#51CACF",
+                        pointRadius: 4,
+                        pointHoverRadius: 4,
+                        pointBorderWidth: 8
+                      }
+                    ]
+                  }
+
+                  }
+                  options={{
+                    legend: {
+                      display: false,
+                      position: "top"
+                    }
+                  }}
+                  width={400}
+                  height={100}
+                />
+              </CardBody>
+              <CardFooter>
+                <div className="chart-legend">
+                  <i className="fa fa-circle text-warning" /> Energy Consumption{" "}
+                  <i className="fa fa-circle text-primary" /> Water Comsumption{" "}
+
+                </div>
+              </CardFooter>
+            </Card>
+          </Col>
+        </Row>
+
+        {/* <Row>
+          <Col>
+            <Card>
+              <CardHeader>
+                Water Consumption
+              </CardHeader>
+              <CardBody>
+                <Row>
+                  <Col xs="12" md="6" xl="6">
+                    <hr className="mt-0" />
+                    <div className="progress-group mb-4">
+                      <div className="progress-group-prepend">
+                        <span className="progress-group-text">
+                          Monday
+                        </span>
+                      </div>
+                      <div className="progress-group-bars">
+                        <Progress className="progress-xs" color="info" value="34" />
+                        <Progress className="progress-xs" color="danger" value="78" />
+                      </div>
+                    </div>
+                    <div className="progress-group mb-4">
+                      <div className="progress-group-prepend">
+                        <span className="progress-group-text">
+                          Tuesday
+                        </span>
+                      </div>
+                      <div className="progress-group-bars">
+                        <Progress className="progress-xs" color="info" value="56" />
+                        <Progress className="progress-xs" color="danger" value="94" />
+                      </div>
+                    </div>
+                    <div className="progress-group mb-4">
+                      <div className="progress-group-prepend">
+                        <span className="progress-group-text">
+                          Wednesday
+                        </span>
+                      </div>
+                      <div className="progress-group-bars">
+                        <Progress className="progress-xs" color="info" value="12" />
+                        <Progress className="progress-xs" color="danger" value="67" />
+                      </div>
+                    </div>
+                    <div className="progress-group mb-4">
+                      <div className="progress-group-prepend">
+                        <span className="progress-group-text">
+                          Thursday
+                        </span>
+                      </div>
+                      <div className="progress-group-bars">
+                        <Progress className="progress-xs" color="info" value="43" />
+                        <Progress className="progress-xs" color="danger" value="91" />
+                      </div>
+                    </div>
+                    <div className="progress-group mb-4">
+                      <div className="progress-group-prepend">
+                        <span className="progress-group-text">
+                          Friday
+                        </span>
+                      </div>
+                      <div className="progress-group-bars">
+                        <Progress className="progress-xs" color="info" value="22" />
+                        <Progress className="progress-xs" color="danger" value="73" />
+                      </div>
+                    </div>
+                    <div className="progress-group mb-4">
+                      <div className="progress-group-prepend">
+                        <span className="progress-group-text">
+                          Saturday
+                        </span>
+                      </div>
+                      <div className="progress-group-bars">
+                        <Progress className="progress-xs" color="info" value="53" />
+                        <Progress className="progress-xs" color="danger" value="82" />
+                      </div>
+                    </div>
+                    <div className="progress-group mb-4">
+                      <div className="progress-group-prepend">
+                        <span className="progress-group-text">
+                          Sunday
+                        </span>
+                      </div>
+                      <div className="progress-group-bars">
+                        <Progress className="progress-xs" color="info" value="9" />
+                        <Progress className="progress-xs" color="danger" value="69" />
+                      </div>
+                    </div>
+                    <div className="legend text-center">
+                      <small>
+                        <sup className="px-1"><Badge pill color="info">&nbsp;</Badge></sup>
+                        Water Consumed
+                        &nbsp;
+                        <sup className="px-1"><Badge pill color="danger">&nbsp;</Badge></sup>
+                        Water at the starting of the day
+                      </small>
+                    </div>
+                  </Col>
+                  <Col xs="12" md="6" xl="6">
+                    <Col sm="6">
+                      <div className="callout callout-warning">
+                        <small className="text-muted">Number of people in the apartment</small>
+                        <br />
+                        <strong className="h4">56</strong>
+                        <div className="chart-wrapper">
+                          <Line data={makeSparkLineData(2, brandWarning)} options={sparklineChartOpts} width={100} height={30} />
+                        </div>
+                      </div>
+                    </Col>
+                    <Col sm="6">
+                      <div className="callout callout-success">
+                        <small className="text-muted">Average Consumption</small>
+                        <br />
+                        <strong className="h4">300 Gallons</strong>
+                        <div className="chart-wrapper">
+                          <Line data={makeSparkLineData(3, brandSuccess)} options={sparklineChartOpts} width={100} height={30} />
+                        </div>
+                      </div>
+                    </Col>
+                    <hr className="mt-0" />
+                  </Col>
+                </Row>
+
+                <br />
+                <Table hover responsive className="table-outline mb-0 d-none d-sm-table">
+                  <thead className="thead-light">
+                    <tr>
+                      <th className="text-center"><i className="icon-people"></i></th>
+                      <th>Manager</th>
+                      <th>Usage</th>
+                      <th>Activity</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="text-center">
+                        <div className="avatar">
+                          <img src={'assets/img/avatars/1.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+                          <span className="avatar-status badge-success"></span>
+                        </div>
+                      </td>
+                      <td>
+                        <div>Meghna Kashyap</div>
+                        <div className="small text-muted">
+                          <span>New</span> | Registered: Jan 1, 2015
+                      </div>
+                      </td>
+                      <td>
+                        <div className="clearfix">
+                          <div className="float-left">
+                            <strong>50%</strong>
+                          </div>
+                        </div>
+                        <Progress className="progress-xs" color="success" value="50" />
+                      </td>
+                      <td>
+                        <div className="small text-muted">Last login</div>
+                        <strong>10 sec ago</strong>
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row> */}
       </div>
     );
   }
