@@ -1,15 +1,13 @@
 export default {
   items: [
-
-    {
-      name: 'Reservoir',
-      url: '/reservoir',
-      icon: 'icon-pie-chart',
-    },
     {
       name: 'Dashboard',
       url: '/dashboard',
       icon: 'icon-speedometer',
+      badge: {
+        variant: 'info',
+        text: 'NEW',
+      },
     },
     /*   
     {
@@ -153,7 +151,11 @@ export default {
         },
       ],
     }, */
-
+    {
+      name: 'Charts',
+      url: '/charts',
+      icon: 'icon-pie-chart',
+    },
     /*{
       name: 'Icons',
       url: '/icons',
